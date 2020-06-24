@@ -1,0 +1,30 @@
+head
+    title #{title || 'Paste | HackMate™' } 
+    link(href='/css/semantic.min.css', rel='stylesheet')
+    //- script(src='https://cdnjs.cloudflare.com/ajax/libs/showdown/1.9.0/showdown.min.js')
+    link(rel='stylesheet', href='https://use.fontawesome.com/releases/v5.6.3/css/all.css', integrity='sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/', crossorigin='anonymous')
+    link(rel='stylesheet', href='https://cdn.rawgit.com/konpa/devicon/df6431e323547add1b4cf45992913f15286456d3/devicon.min.css')
+    meta(name='viewport', content='width=device-width,initial-scale=1.0')
+    meta(property='og:title', content=title || 'Paste | HackMate™')
+    meta(property='og:description', content= desc || 'Code uploader at HackMate 💻')
+    meta(property='og:image', content='https://i.ibb.co/Njz3p1q/hacmate.png')
+    meta(property='og:site_name', content='HackMate.tech')
+    meta(property='og:type', content='website')
+    block head
+
+.ui.secondary.menu.pointing
+  a.active.item Home
+  a.item(href='/saved') Saved
+  a.item(href='/collab') Collaborate
+  .right.menu
+    if(!isLogged)
+      a.ui.item(href='/auth') Login
+    else
+      a.ui.item(href='javascript:alert("Coming Soon")') Profile
+        
+body
+  if !isLogged
+    .ui.message.container
+      .header Login to save your codes
+      p It's recommended to login before uploading any code, doing this will save the code in your account.
+  block content

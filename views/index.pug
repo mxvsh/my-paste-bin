@@ -1,0 +1,36 @@
+extends layout
+block head
+    script(src='/js/codemirror.js')
+    link(href='/css/codemirror.css' rel='stylesheet')
+    link(href='/css/neo.css' rel='stylesheet')
+block content
+    .ui.container
+        form.ui.form(action='/upload', method='post')
+            .field
+                if !value
+                    label Your Code/Text
+                textarea(id='textarea' name='code')=value || 'print("hi")'
+            if !value
+                button.ui.button Submit
+
+            else
+                div(style='margin-bottom: 1em')
+                    .ui.label
+                        i(class='devicon-'+lang+'-plain')
+                    .ui.label
+                        i.fa.fa-eye &nbsp;#{views}
+                    .ui.label
+                        i.fa.fa-user &nbsp;#{username }
+                a.ui.label(href='/raw/'+id)
+                    i.fa.fa-book
+                    |  Raw
+                a.ui.label.red(href='/abuse/'+id)
+                    i.fa.fa-exclamation-circle 
+                    |  Abusive Content
+    script.
+        const textarea = document.getElementById('textarea')
+        var editor = CodeMirror.fromTextArea(textarea, {
+            lineNumbers: true,
+            mode:  "javascript",
+            theme: 'neo',
+        });
